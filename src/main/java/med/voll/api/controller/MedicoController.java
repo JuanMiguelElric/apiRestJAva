@@ -9,6 +9,9 @@ import med.voll.api.model.medico.DadosListagemMedico;
 import med.voll.api.model.medico.Medico;
 import med.voll.api.model.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +29,15 @@ public class MedicoController {
 
         repository.save(new Medico(dados));
     }
+    /*
+    Obs: Cuidado na hora de importar. Selecione Pageable org.springframework.data.domain e não Pageable java.awt.print. A segunda não é aplicável ao Spring Framework.*/
+   //PageableDefault ele vai carregar na url 10 registros do db, adicionando o metodo sort ele vai ordenar de acordo com aquilo que for adicionado entre cochetes do short
+    
     @GetMapping
-    public List<DadosListagemMedico> listar(){
-        return repository.findAll().stream().map(DadosListagemMedico::new).toList();
+    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10) Pageable paginacao){
+
+        // estou listando com dto apenas oque vai ser preciso para apresentar na listagem de medicos
+        return repository.findAll(paginacao).map(DadosListagemMedico::new);
 
     }
 
