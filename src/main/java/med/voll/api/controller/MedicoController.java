@@ -47,4 +47,15 @@ public class MedicoController {
 
     }
 
+    //essa exclusão elimina do bando de dados
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        repository.deleteById(id);
+
+
+    }
+
+    //exclusao logica não elimina do banco de dados
+
 }
