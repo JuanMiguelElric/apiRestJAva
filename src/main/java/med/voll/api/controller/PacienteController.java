@@ -1,20 +1,24 @@
 package med.voll.api.controller;
 
 
+import jakarta.validation.Valid;
 import med.voll.api.model.paciente.DadosCadastroPaciente;
+import med.voll.api.model.paciente.Paciente;
+import med.voll.api.model.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
 
-    @GetMapping
-    public void cadastrar(@RequestBody DadosCadastroPaciente dados){
-        System.out.println(dados);
+    @Autowired
+    private PacienteRepository repository;
+
+    @PostMapping
+    public void cadastrar(@RequestBody @Valid DadosCadastroPaciente dados){
+        repository.save(new Paciente(dados));
 
     }
 
