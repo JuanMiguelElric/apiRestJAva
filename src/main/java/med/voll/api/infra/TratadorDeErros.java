@@ -15,7 +15,7 @@ public class TratadorDeErros {
 
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+  /*  @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity tratarErro400(MethodArgumentNotValidException ex){
         var erros = ex.getFieldErrors();
 
@@ -25,5 +25,5 @@ public class TratadorDeErros {
     private record DadosErroValidacao(String campo, String mensagem){
 
 
-    }
+    }*/
 }
