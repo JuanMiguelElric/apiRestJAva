@@ -1,0 +1,32 @@
+package med.voll.api.model.consulta;
+
+
+import med.voll.api.model.medico.MedicoRepository;
+import med.voll.api.model.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+
+public class AgendadeConsultas {
+
+    //tem que chamar o autowired para que o spring ative o repository em nosso service
+    @Autowired
+    private ConsultaRepository consultaRepository;
+
+    @Autowired
+    private MedicoRepository medicoRepository;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+
+    public void agendar(DadosConsultasMedicas dados){
+        var paciente = pacienteRepository.findById(dados.idPaciente()).get();
+        var medico = medicoRepository.findById(dados.idMedico()).get();
+        var consulta = new Consulta(null,medico, paciente, dados.data());
+        consultaRepository.save(consulta);
+
+    }
+
+}
