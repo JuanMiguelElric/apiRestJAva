@@ -3,6 +3,7 @@ package med.voll.api.model.consulta;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
+import med.voll.api.model.medico.Especialidade;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +18,10 @@ public record DadosConsultasMedicas(
 
         @NotNull
         @Future
-        @JsonFormat(pattern = "dd/MM/yyy HH:mm")
-        LocalDateTime data
+
+        LocalDateTime data,
+
+
+        Especialidade especialidade
         ) {
 }
